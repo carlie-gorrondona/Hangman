@@ -7,17 +7,18 @@ def playGame():
     randomWord = random.randint(0, 3)
     gameWord = wordsArray[randomWord]
     gameDashes = ""
+    userGuess = ""
     playerGuesses = 0
     wordSolved = False
 
     for letter in gameWord:
-            if letter.isalpha() == True:
-                gameDashes = gameDashes + "_ "
+        if letter.isalpha() == True:
+            gameDashes = gameDashes + "_ "
 
     while playerGuesses != 6 or wordSolved == True:
         printGallow(playerGuesses)
-        printLettersAndDashes(gameWord, playerGuesses)
-        playerGuess(gameWord)
+        printLettersAndDashes(gameWord, gameDashes, playerGuesses, wordSolved, userGuess)
+        userGuess = playerGuess(gameWord, playerGuesses)
 
 
 def printGallow(playerGuesses):
@@ -75,8 +76,17 @@ def printGallow(playerGuesses):
         case _:
             print("Something went wrong")
 
-def printLettersAndDashes(gameWord, playerGuesses):
-    print()
+def printLettersAndDashes(gameWord, gameDashes, playerGuesses, wordSolved, userGuess):
+
+    if playerGuesses != 0 and wordSolved == False:
+        for letter in gameWord:
+            if userGuess == letter:
+                index = gameWord.index(letter)
+                gameDashes = gameDashes.pop(index)
+
+    else:
+        print(gameDashes)
+        
 
 
             
@@ -90,9 +100,17 @@ def playerGuess(gameWord, playerGuesses):
         
     if letterGuessedCorrectly == False:
         playerGuesses += 1
+        # incorrectGuesses(userGuess)
+    
+    return userGuess
             
 
+# def incorrectGuesses(userGuess):
+#     incorrectLetters = []
+#     incorrectLetters.append(userGuess)
     
+#     return incorrectLetters
+
 
     
 
