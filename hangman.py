@@ -17,7 +17,7 @@ def playGame():
 
     while playerGuesses != 6 or wordSolved == True:
         printGallow(playerGuesses)
-        printLettersAndDashes(gameWord, gameDashes, playerGuesses, wordSolved, userGuess)
+        gameDashes = printLettersAndDashes(gameWord, gameDashes, playerGuesses, wordSolved, userGuess)
         userGuess = playerGuess(gameWord, playerGuesses)
 
 
@@ -81,11 +81,13 @@ def printLettersAndDashes(gameWord, gameDashes, playerGuesses, wordSolved, userG
     if playerGuesses != 0 and wordSolved == False:
         for letter in gameWord:
             if userGuess == letter:
-                index = gameWord.index(letter)
-                gameDashes = gameDashes.pop(index)
-
-    else:
+                letterIndex = gameWord.index(letter)
+                print(letterIndex)
+                gameDashes = gameDashes.replace(gameDashes[letterIndex], userGuess) #this is wrong at the moment
+    elif playerGuesses == 0 and wordSolved == False:
         print(gameDashes)
+
+    return gameDashes
         
 
 
